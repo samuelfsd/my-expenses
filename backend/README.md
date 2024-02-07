@@ -7,6 +7,7 @@ Project for managing my finances and expanses!
 # A FAZER:
 - [x] criar projeto
 - [x] planejar sistema
+- [x] construir entidades
   - [] controle de usuário (CRUD)
     - []  Auth JWT
   - [] criar centro de custo (CRUD)
