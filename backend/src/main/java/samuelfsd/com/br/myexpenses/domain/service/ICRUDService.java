@@ -7,5 +7,5 @@ public interface ICRUDService<REQ,RES> {
     RES getById(Long id);
     RES create(REQ dto);
     RES update(Long id, REQ dto);
-    RES delete(Long id);
+    void delete(Long id);
 }
