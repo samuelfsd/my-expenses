@@ -1,15 +1,29 @@
 package samuelfsd.com.br.myexpenses.domain.service;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import samuelfsd.com.br.myexpenses.domain.model.User;
+import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
 import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO>{
+
+    @Autowired
+    private ModelMapper mapper;
+
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public List<UserResponseDTO> getAll() {
-        // TODO
-        return null;
+       List<User> users = userRepository.findAll();
+
+        return users.stream()
+                .map(user -> mapper.map(user, UserResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
