@@ -35,7 +35,7 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
             // throw error
         }
 
-        return mapper.map(userOpt, UserResponseDTO.class);
+        return mapper.map(userOpt.get(), UserResponseDTO.class);
     }
 
     @Override
