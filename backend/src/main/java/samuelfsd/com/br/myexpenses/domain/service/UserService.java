@@ -8,6 +8,7 @@ import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO>{
@@ -28,8 +29,13 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Override
     public UserResponseDTO getById(Long id) {
-        // TODO
-        return null;
+        Optional<User> userOpt = userRepository.findById(id);
+
+        if(userOpt.isEmpty()) {
+            // throw error
+        }
+
+        return mapper.map(userOpt, UserResponseDTO.class);
     }
 
     @Override
