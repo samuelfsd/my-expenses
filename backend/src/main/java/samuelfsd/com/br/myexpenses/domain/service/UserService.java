@@ -31,9 +31,7 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
     public UserResponseDTO getById(Long id) {
         Optional<User> userOpt = userRepository.findById(id);
 
-        if(userOpt.isEmpty()) {
-            // throw error
-        }
+        //if(userOpt.isEmpty()) {}
 
         return mapper.map(userOpt.get(), UserResponseDTO.class);
     }
