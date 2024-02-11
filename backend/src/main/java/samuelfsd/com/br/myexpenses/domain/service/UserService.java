@@ -2,6 +2,7 @@ package samuelfsd.com.br.myexpenses.domain.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
 import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
@@ -31,7 +32,9 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
     public UserResponseDTO getById(Long id) {
         Optional<User> userOpt = userRepository.findById(id);
 
-        //if(userOpt.isEmpty()) {}
+        if(userOpt.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi possível encontrar o usuário com o id: " + id);
+        }
 
         return mapper.map(userOpt.get(), UserResponseDTO.class);
     }
