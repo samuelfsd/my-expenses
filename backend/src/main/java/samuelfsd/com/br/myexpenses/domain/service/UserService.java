@@ -9,6 +9,7 @@ import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
 import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,12 +58,13 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Override
     public UserResponseDTO update(Long id, UserRequestDTO dto) {
-        getById(id);
+        UserResponseDTO useRes = getById(id);
         validateUser(dto);
 
         User user = mapper.map(dto, User.class);
 
         user.setId(id);
+        user.setDateInactivation(useRes.getDateInactivation());
         userRepository.save(user);
 
         return mapper.map(user, UserResponseDTO.class);
@@ -70,8 +72,12 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Override
     public void delete(Long id) {
-        getById(id);
-        userRepository.deleteById(id);
+        UserResponseDTO userRes = getById(id);
+
+        User user = mapper.map(userRes, User.class);
+        user.setDateInactivation(new Date());
+
+        userRepository.save(user);
     }
 
     private void validateUser(UserRequestDTO dto){
