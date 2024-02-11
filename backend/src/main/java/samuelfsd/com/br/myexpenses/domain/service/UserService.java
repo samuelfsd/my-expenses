@@ -2,6 +2,7 @@ package samuelfsd.com.br.myexpenses.domain.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import samuelfsd.com.br.myexpenses.domain.exception.ResourceBadRequestException;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
@@ -41,18 +42,41 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Override
     public UserResponseDTO create(UserRequestDTO dto) {
-        // TODO
-        return null;
+        validateUser(dto);
+
+        User user = mapper.map(dto, User.class);
+
+        // crypt password
+
+        // save user
+        user.setId(null);
+        userRepository.save(user);
+
+        return mapper.map(user, UserResponseDTO.class);
     }
 
     @Override
     public UserResponseDTO update(Long id, UserRequestDTO dto) {
-        // TODO
-        return null;
+        getById(id);
+        validateUser(dto);
+
+        User user = mapper.map(dto, User.class);
+
+        user.setId(id);
+        userRepository.save(user);
+
+        return mapper.map(user, UserResponseDTO.class);
     }
 
     @Override
     public void delete(Long id) {
-        // TODO
+        getById(id);
+        userRepository.deleteById(id);
+    }
+
+    private void validateUser(UserRequestDTO dto){
+        if(dto.getEmail() == null || dto.getPassword() == null) {
+            throw new ResourceBadRequestException("E-mail e senha são obrigatórios!");
+        }
     }
 }
