@@ -2,8 +2,6 @@
 
 Projeto para gerenciar minhas finaças!
 
-Project for managing my finances and expanses!
-
 # A FAZER:
 - [x] criar projeto
 - [x] planejar sistema
@@ -23,6 +21,8 @@ Project for managing my finances and expanses!
     - [] filtro por periodo de vencimento
 
 # TODO:
+Project for managing my finances and expanses!
+
 - [x] create project
 - [x] system details
     - [] user control (CRUD)
