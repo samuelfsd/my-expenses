@@ -1,4 +1,4 @@
-### MY EXPENSES 
+### MY EXPENSES
 
 Projeto para gerenciar minhas finaças!
 
@@ -14,8 +14,8 @@ Projeto para gerenciar minhas finaças!
     - [] todo titulo deve estar vinculado a um usuario
     - [] todo titulo deve estar vinculado 1 ou 'N' centro de custos
   - [] criar um fluxo endpoint de fluxo de caixa
-    - [] obter o total a pagar 
-    - [] obter o total a receber 
+    - [] obter o total a pagar
+    - [] obter o total a receber
     - [] obter saldo
     - [] lista de titulos (a pagar, a receber)
     - [] filtro por periodo de vencimento
@@ -29,3 +29,13 @@ Project for managing my finances and expanses!
         - [] User Auth JWT
     - [] create custom center (CRUD)
     - [] create titles (CRUD)
+
+
+# stack
+
+- Java 17
+- Spring Boot 3
+- Spring Security
+- JWT
+- Postgresql
+- Model Mapper
