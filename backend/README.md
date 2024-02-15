@@ -39,3 +39,9 @@ Project for managing my finances and expanses!
 - JWT
 - Postgresql
 - Model Mapper
+
+# futuras implementações
+
+- [] testes de unidade
+- [] testes de integração
+- [] testes end to end 
