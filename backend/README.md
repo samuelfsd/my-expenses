@@ -47,4 +47,5 @@ Project for managing my finances and expanses!
 - [] testes end to end
 
 # infra
-- [] aws
+- [] aws ?
+- []
