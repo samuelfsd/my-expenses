@@ -44,4 +44,7 @@ Project for managing my finances and expanses!
 
 - [] testes de unidade
 - [] testes de integração
-- [] testes end to end 
+- [] testes end to end
+
+# infra
+- [] aws
