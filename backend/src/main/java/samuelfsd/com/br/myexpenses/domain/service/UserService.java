@@ -45,12 +45,17 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
     public UserResponseDTO create(UserRequestDTO dto) {
         validateUser(dto);
 
+        Optional<User> optionalUser = userRepository.findByEmail(dto.getEmail());
+
+        if (optionalUser.isPresent()) {
+            throw new ResourceBadRequestException("Já existe um usuário com este email: " + dto.getEmail());
+        }
+
         User user = mapper.map(dto, User.class);
 
-        // crypt password
-
-        // save user
         user.setId(null);
+        user.setCreatedAt(new Date());
+
         userRepository.save(user);
 
         return mapper.map(user, UserResponseDTO.class);
