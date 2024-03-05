@@ -73,9 +73,13 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Override
     public void delete(Long id) {
-        UserResponseDTO userRes = getById(id);
+        Optional<User> userOpt = userRepository.findById(id);
 
-        User user = mapper.map(userRes, User.class);
+        if(userOpt.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi possível encontrar o usuário com o id: " + id);
+        }
+
+        User user = userOpt.get();
         user.setDateInactivation(new Date());
 
         userRepository.save(user);
