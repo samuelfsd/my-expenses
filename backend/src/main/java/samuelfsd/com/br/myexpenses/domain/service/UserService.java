@@ -65,6 +65,7 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
         user.setId(id);
         user.setDateInactivation(useRes.getDateInactivation());
+        user.setCreatedAt(useRes.getCreated_at());
         userRepository.save(user);
 
         return mapper.map(user, UserResponseDTO.class);

@@ -10,6 +10,7 @@ public class UserResponseDTO {
 
     private String profilePhoto;
 
+    private Date created_at;
     private Date dateInactivation;
 
     public Long getId() {
@@ -50,5 +51,13 @@ public class UserResponseDTO {
 
     public void setDateInactivation(Date dateInactivation) {
         this.dateInactivation = dateInactivation;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
