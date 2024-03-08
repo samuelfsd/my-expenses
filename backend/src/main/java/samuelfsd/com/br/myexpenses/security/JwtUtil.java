@@ -1,5 +1,6 @@
 package samuelfsd.com.br.myexpenses.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,20 @@ public class JwtUtil {
         }catch (Exception e){
             System.out.println(e.getMessage());
             return "";
+        }
+    }
+
+    private Claims getClaims (String token) {
+        try {
+
+            // generate key
+            Key secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+
+            return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
