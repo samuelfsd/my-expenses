@@ -64,10 +64,25 @@ public class JwtUtil {
     public String getUserName(String token) {
         Claims claims = getClaims(token);
 
-        if (claims == null) {
-            return null;
-        }
+        if (claims == null) return null;
 
         return claims.getSubject();
+    }
+
+    public boolean isValidToken(String token) {
+        Claims claims = getClaims(token);
+
+        if (claims == null) return false;
+
+        String email = claims.getSubject();
+        Date dateExpiration = claims.getExpiration();
+
+        Date now = new Date(System.currentTimeMillis());
+
+        if(email == null && now.after(dateExpiration)){
+            return false;
+        }
+
+        return true;
     }
 }
