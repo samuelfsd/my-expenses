@@ -22,7 +22,7 @@ public class JwtUtil {
     private Long jwtExpirationTime;
 
 
-    public String createToken (Authentication auth) {
+    public String createToken(Authentication auth) {
         // get time + expiration time
         Date dateExpiration = new Date(new Date().getTime() + jwtExpirationTime);
 
@@ -47,7 +47,7 @@ public class JwtUtil {
         }
     }
 
-    private Claims getClaims (String token) {
+    private Claims getClaims(String token) {
         try {
 
             // generate key
@@ -61,4 +61,13 @@ public class JwtUtil {
         }
     }
 
+    public String getUserName(String token) {
+        Claims claims = getClaims(token);
+
+        if (claims == null) {
+            return null;
+        }
+
+        return claims.getSubject();
+    }
 }
