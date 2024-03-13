@@ -8,9 +8,9 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 
     private JwtUtil jwtUtil;
 
-    public JwtAuthFilter(AuthenticationManager authenticationManager, AuthenticationManager authenticationManager1, JwtUtil jwtUtil) {
+    public JwtAuthFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super();
-        this.authenticationManager = authenticationManager1;
+        this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
 
         setFilterProcessesUrl("/api/auth");
