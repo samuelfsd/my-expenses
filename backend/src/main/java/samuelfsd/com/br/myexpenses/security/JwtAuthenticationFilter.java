@@ -24,7 +24,7 @@ import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 import java.io.IOException;
 import java.util.Date;
 
-public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
     private JwtUtil jwtUtil;
@@ -32,7 +32,7 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Autowired
     private ModelMapper mapper;
 
-    public JwtAuthFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super();
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
