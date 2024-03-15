@@ -12,13 +12,17 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import samuelfsd.com.br.myexpenses.common.ConvertData;
+import samuelfsd.com.br.myexpenses.domain.model.ResponseError;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 import samuelfsd.com.br.myexpenses.dto.User.LoginRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.LoginResponseDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
@@ -73,5 +77,22 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
         response.setContentType("application/json");
 
         response.getWriter().write(new Gson().toJson(loginResponseDTO));
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication
+            (HttpServletRequest request,
+             HttpServletResponse response,
+             AuthenticationException failure) throws IOException {
+
+        String dateTime = ConvertData.convertDateTime(new Date());
+
+        ResponseError error = new ResponseError(dateTime, 401, "Unauthorized", failure.getMessage());
+
+        response.setStatus(401);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+
+        response.getWriter().write(new Gson().toJson(error));
     }
 }
