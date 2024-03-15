@@ -2,6 +2,7 @@ package samuelfsd.com.br.myexpenses.domain.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceBadRequestException;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.User;
@@ -21,6 +22,9 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     @Override
     public List<UserResponseDTO> getAll() {
        List<User> users = userRepository.findAll();
@@ -63,7 +67,10 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
         User user = mapper.map(dto, User.class);
 
+        String password = passwordEncoder.encode(user.getPassword());
+
         user.setId(null);
+        user.setPassword(password);
         user.setCreatedAt(new Date());
 
         userRepository.save(user);
@@ -78,7 +85,10 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
 
         User user = mapper.map(dto, User.class);
 
-        user.setId(id);
+        String password = passwordEncoder.encode(dto.getPassword());
+
+        user.setId(null);
+        user.setPassword(password);
         user.setDateInactivation(useRes.getDateInactivation());
         user.setCreatedAt(useRes.getCreated_at());
         userRepository.save(user);
