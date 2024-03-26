@@ -5,12 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import samuelfsd.com.br.myexpenses.domain.service.UserService;
-import samuelfsd.com.br.myexpenses.dto.User.UserDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
-import javax.swing.text.rtf.RTFEditorKit;
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin("*")
