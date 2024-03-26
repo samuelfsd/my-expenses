@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -28,9 +26,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
 
     private JwtUtil jwtUtil;
-
-    @Autowired
-    private ModelMapper mapper;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super();
@@ -67,11 +62,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         User user = (User) auth.getPrincipal();
         String token = jwtUtil.createToken(auth);
 
-        UserResponseDTO userResponseDTO = mapper.map(user, UserResponseDTO.class);
+        // don't use mapper in this package
+        UserResponseDTO userResponse = new UserResponseDTO();
+        userResponse.setId(user.getId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setName(user.getName());
+        userResponse.setProfilePhoto(user.getProfilePhoto());
+        userResponse.setDateInactivation(user.getDateInactivation());
+        userResponse.setCreated_at(user.getCreatedAt());
 
         LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
         loginResponseDTO.setToken("Bearer" + token);
-        loginResponseDTO.setUser(userResponseDTO);
+        loginResponseDTO.setUser(userResponse);
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
