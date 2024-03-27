@@ -107,7 +107,7 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
         User user = userOpt.get();
         user.setDateInactivation(new Date());
 
-        userRepository.save(user);
+        userRepository.delete(user);
     }
 
     private void validateUser(UserRequestDTO dto){
