@@ -7,7 +7,7 @@ Projeto para gerenciar minhas finaças!
 - [x] planejar sistema
 - [x] construir entidades
   - [] controle de usuário (CRUD)
-    - []  Auth JWT
+    - [x]  Auth JWT
   - [] criar centro de custo (CRUD)
     - [] todo centro de custo tem que estar vinculado a um usuario
   - [] criar titulos (CRUD) - DEBITO e CREDITO
