@@ -3,6 +3,7 @@ package samuelfsd.com.br.myexpenses.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,7 +73,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         userResponse.setCreated_at(user.getCreatedAt());
 
         LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
-        loginResponseDTO.setToken("Bearer" + token);
+        loginResponseDTO.setToken("Bearer " + token);
         loginResponseDTO.setUser(userResponse);
 
         response.setCharacterEncoding("UTF-8");
@@ -85,13 +86,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication
             (HttpServletRequest request,
              HttpServletResponse response,
-             AuthenticationException failure) throws IOException {
+             AuthenticationException failed) throws IOException, ServletException  {
 
         String dateTime = ConvertData.convertDateTime(new Date());
 
-        ResponseError error = new ResponseError(dateTime, 401, "Unauthorized", failure.getMessage());
+        ResponseError error = new ResponseError(dateTime, 401, "Unauthorized", failed.getMessage());
 
-        response.setStatus(401);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
