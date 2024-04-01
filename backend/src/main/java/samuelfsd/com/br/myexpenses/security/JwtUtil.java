@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
@@ -32,7 +31,7 @@ public class JwtUtil {
         try {
 
             // generate key
-            Key secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+            Key secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes("UTF-8"));
 
             return Jwts.builder()
                     .setSubject(user.getUsername())
@@ -51,12 +50,12 @@ public class JwtUtil {
         try {
 
             // generate key
-            Key secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+            Key secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes("UTF-8"));
 
-            return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
-
+            Claims claims =  Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+            return claims;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }

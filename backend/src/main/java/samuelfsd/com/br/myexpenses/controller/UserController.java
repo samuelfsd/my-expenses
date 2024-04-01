@@ -39,7 +39,6 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> create(@RequestBody UserRequestDTO dto) throws Exception {
-        // System.out.println("chegou aqui");
         UserResponseDTO user = userService.create(dto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }

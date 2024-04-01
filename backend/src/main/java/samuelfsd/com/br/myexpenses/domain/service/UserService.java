@@ -2,19 +2,21 @@ package samuelfsd.com.br.myexpenses.domain.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceBadRequestException;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
 import samuelfsd.com.br.myexpenses.dto.User.UserRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO>{
 
     @Autowired

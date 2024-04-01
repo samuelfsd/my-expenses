@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity
+@Entity(name = "users")
 public class User implements UserDetails {
 
     @Id

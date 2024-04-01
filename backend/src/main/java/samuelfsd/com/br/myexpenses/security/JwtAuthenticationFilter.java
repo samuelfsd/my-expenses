@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
 
-        setFilterProcessesUrl("/api/auth");
+        setFilterProcessesUrl("/api/v1/auth");
     }
 
     @Override
@@ -60,6 +60,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
              HttpServletResponse response,
              FilterChain chain,
              Authentication auth) throws IOException {
+
         User user = (User) auth.getPrincipal();
         String token = jwtUtil.createToken(auth);
 
