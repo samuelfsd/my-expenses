@@ -6,7 +6,7 @@ Projeto para gerenciar minhas finaças!
 - [x] criar projeto
 - [x] planejar sistema
 - [x] construir entidades
-  - [] controle de usuário (CRUD)
+  - [x] controle de usuário (CRUD)
     - [x]  Auth JWT
   - [] criar centro de custo (CRUD)
     - [] todo centro de custo tem que estar vinculado a um usuario
