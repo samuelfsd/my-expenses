@@ -22,10 +22,10 @@ public class CostCenter {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String description;
 
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String observation;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -43,20 +43,20 @@ public class CostCenter {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public User getUser() {
