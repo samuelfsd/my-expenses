@@ -1,33 +1,18 @@
-package samuelfsd.com.br.myexpenses.domain.model;
+package samuelfsd.com.br.myexpenses.dto.Registration;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import samuelfsd.com.br.myexpenses.domain.Enum.TypeRegistration;
+import samuelfsd.com.br.myexpenses.dto.CostCenter.CostCenterResponseDTO;
 
 import java.util.Date;
 import java.util.List;
 
-@Entity
-public class Registration {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "registration_id")
+public class RegistrationResponseDTO {
     private Long id;
 
-    @Column(nullable = false)
     private String description;
 
     private TypeRegistration type;
 
-    @Column(nullable = false)
     private Double value;
 
     private Date created_at;
@@ -38,19 +23,8 @@ public class Registration {
 
     private Date payment_date;
 
-    @ManyToMany
-    @JoinTable(
-            name = "registration_costcenter",
-            joinColumns = @JoinColumn(name = "registration_id"),
-            inverseJoinColumns = @JoinColumn(name = "costcenter_id")
-    )
-    private List<CostCenter> costCenters;
+    private List<CostCenterResponseDTO> costCenters;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @Column(columnDefinition = "TEXT")
     private String observation;
 
     public Long getId() {
@@ -117,20 +91,12 @@ public class Registration {
         this.payment_date = payment_date;
     }
 
-    public List<CostCenter> getCostCenters() {
+    public List<CostCenterResponseDTO> getCostCenters() {
         return costCenters;
     }
 
-    public void setCostCenters(List<CostCenter> costCenters) {
+    public void setCostCenters(List<CostCenterResponseDTO> costCenters) {
         this.costCenters = costCenters;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getObservation() {
