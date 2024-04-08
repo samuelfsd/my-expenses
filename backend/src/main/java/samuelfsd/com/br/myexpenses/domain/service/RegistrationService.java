@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import samuelfsd.com.br.myexpenses.domain.exception.ResourceBadRequestException;
 import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.Registration;
 import samuelfsd.com.br.myexpenses.domain.model.User;
@@ -45,6 +46,8 @@ public class RegistrationService implements ICRUDService<RegistrationRequestDTO,
 
     @Override
     public RegistrationResponseDTO create(RegistrationRequestDTO dto) {
+        validateRegistration(dto);
+
         Registration registration = mapper.map(dto, Registration.class);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -60,11 +63,36 @@ public class RegistrationService implements ICRUDService<RegistrationRequestDTO,
 
     @Override
     public RegistrationResponseDTO update(Long id, RegistrationRequestDTO dto) {
-        return null;
+        getById(id);
+        validateRegistration(dto);
+
+        Registration registration = mapper.map(dto, Registration.class);
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        registration.setUser(user);
+        registration.setId(id);
+
+        registration = registrationRepository.save(registration);
+
+        return mapper.map(registration, RegistrationResponseDTO.class);
+
     }
 
     @Override
     public void delete(Long id) {
+        getById(id);
 
+        registrationRepository.deleteById(id);
+    }
+
+    private void validateRegistration (RegistrationRequestDTO dto) {
+        if (dto.getType() == null ||
+            dto.getExpiration_date() == null ||
+            dto.getValue() == null ||
+            dto.getDescription() == null
+        ) {
+            throw new ResourceBadRequestException("Os campos de tipo, data de vencimento, valor e descrição são obrigatórios.");
+        }
     }
 }
