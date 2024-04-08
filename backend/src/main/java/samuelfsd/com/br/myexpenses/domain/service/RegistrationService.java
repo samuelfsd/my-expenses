@@ -3,12 +3,14 @@ package samuelfsd.com.br.myexpenses.domain.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import samuelfsd.com.br.myexpenses.domain.exception.ResourceNotFoundException;
 import samuelfsd.com.br.myexpenses.domain.model.Registration;
 import samuelfsd.com.br.myexpenses.domain.repository.RegistrationRepository;
 import samuelfsd.com.br.myexpenses.dto.Registration.RegistrationRequestDTO;
 import samuelfsd.com.br.myexpenses.dto.Registration.RegistrationResponseDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +31,13 @@ public class RegistrationService implements ICRUDService<RegistrationRequestDTO,
 
     @Override
     public RegistrationResponseDTO getById(Long id) {
-        return null;
+        Optional<Registration> registrationOpt = registrationRepository.findById(id);
+
+        if (registrationOpt.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi encontrado nenhum Título com este ID" + id);
+        }
+
+        return mapper.map(registrationOpt.get(), RegistrationResponseDTO.class);
     }
 
     @Override
@@ -41,7 +49,7 @@ public class RegistrationService implements ICRUDService<RegistrationRequestDTO,
     public RegistrationResponseDTO update(Long id, RegistrationRequestDTO dto) {
         return null;
     }
-a
+
     @Override
     public void delete(Long id) {
 
