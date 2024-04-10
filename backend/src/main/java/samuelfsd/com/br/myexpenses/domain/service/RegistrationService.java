@@ -86,6 +86,14 @@ public class RegistrationService implements ICRUDService<RegistrationRequestDTO,
         registrationRepository.deleteById(id);
     }
 
+    public List<RegistrationResponseDTO> getByExpirationDate(String startDate, String endDate) {
+        List<Registration> registrations = registrationRepository.getCashFlowByExpirationDate(startDate, endDate);
+
+        return registrations.stream()
+                .map(registration -> mapper.map(registration, RegistrationResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
     private void validateRegistration (RegistrationRequestDTO dto) {
         if (dto.getType() == null ||
             dto.getExpiration_date() == null ||
