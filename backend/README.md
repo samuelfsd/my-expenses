@@ -8,27 +8,17 @@ Projeto para gerenciar minhas finaças!
 - [x] construir entidades
   - [x] controle de usuário (CRUD)
     - [x]  Auth JWT
-  - [] criar centro de custo (CRUD)
-    - [] todo centro de custo tem que estar vinculado a um usuario
-  - [] criar titulos (CRUD) - DEBITO e CREDITO
-    - [] todo titulo deve estar vinculado a um usuario
-    - [] todo titulo deve estar vinculado 1 ou 'N' centro de custos
-  - [] criar um fluxo endpoint de fluxo de caixa
-    - [] obter o total a pagar
-    - [] obter o total a receber
-    - [] obter saldo
-    - [] lista de titulos (a pagar, a receber)
-    - [] filtro por periodo de vencimento
-
-# TODO:
-Project for managing my finances and expanses!
-
-- [x] create project
-- [x] system details
-    - [] user control (CRUD)
-        - [] User Auth JWT
-    - [] create custom center (CRUD)
-    - [] create titles (CRUD)
+  - [x] criar centro de custo (CRUD)
+    - [x] todo centro de custo tem que estar vinculado a um usuario
+  - [x] criar titulos (CRUD) - DEBITO e CREDITO
+    - [x] todo titulo deve estar vinculado a um usuario
+    - [x] todo titulo deve estar vinculado 1 ou 'N' centro de custos
+  - [x] criar um fluxo endpoint de fluxo de caixa
+    - [x] obter o total a pagar
+    - [x] obter o total a receber
+    - [x] obter saldo
+    - [x] lista de titulos (a pagar, a receber)
+    - [x] filtro por periodo de vencimento
 
 
 # stack
@@ -42,10 +32,13 @@ Project for managing my finances and expanses!
 
 # futuras implementações
 
-- [] testes de unidade
-- [] testes de integração
-- [] testes end to end
+- [ ] testes de unidade ? 
+- [ ] testes de integração ? 
+- [ ] testes end to end ? 
+- [ ] subir numa cloud ? 
+- [ ] documentar (swagger)
 
 # infra
-- [] aws ?
-- []
+- [ ] pipeline ? 
+- [ ] ci/cd ? 
+- [ ] aws ?
