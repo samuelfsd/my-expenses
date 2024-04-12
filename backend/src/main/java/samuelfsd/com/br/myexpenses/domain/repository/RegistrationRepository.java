@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM public.registration" +
+    @Query(nativeQuery = true, value = "SELECT * FROM public.registration " +
         "WHERE expiration_date " +
         "BETWEEN TO_TIMESTAMP(:startDate, 'YYYY-MM-DD hh24:MI:SS') AND " +
         "TO_TIMESTAMP(:endDate, 'YYYY-MM-DD hh24:MI:SS')"
