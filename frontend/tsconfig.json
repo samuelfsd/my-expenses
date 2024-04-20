@@ -8,7 +8,17 @@
 
     // imports utils
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] },
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components":[ "./src/components/*"],
+      "@/routes":[ "./src/routes/*"],
+      "@/pages":[ "./src/pages/*"],
+      "@/assets":[ "./src/assets/*"],
+      "@/stores":[ "./src/stores/*"],
+      "@/services":[ "src/services/*"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

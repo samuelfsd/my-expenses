@@ -12,6 +12,11 @@
   },
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils"
+    "utils": "@/lib/utils",
+    "routes": "@/routes",
+    "pages": "@/pages",
+    "assets": "@/assets",
+    "stores": "@/stores",
+    "services": "@/services"
   }
 }
