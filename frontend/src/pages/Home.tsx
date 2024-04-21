@@ -1,5 +1,7 @@
 export const Home = () => {
   return (
-    <h1>home</h1>
+    <div className="flex h-screen items-center justify-center">
+      <h1>Home page</h1>
+    </div>
   )
 }
