@@ -13,7 +13,7 @@ export const App  = () => {
   const router = createBrowserRouter([
     {
         path: "/",
-        element: token ? <Home /> : <Navigate replace to="/entrar" />
+        element: token ? <Home /> : <Navigate replace to="/" />
     },
     {
         path: "/entrar",

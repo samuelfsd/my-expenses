@@ -9,7 +9,7 @@ interface Credentials {
 
 const loginUser = async (credentials: Credentials): Promise<boolean> => {
   try {
-    const response = await instance.post('/users', credentials);
+    const response = await instance.post('users/login', credentials);
     const { token } = response.data;
     useAuthStore.getState().setToken(token);
     return true;
