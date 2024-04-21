@@ -34,7 +34,7 @@ public class WebSecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users", "/api/v1/users/login").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

@@ -117,4 +117,20 @@ public class UserService implements ICRUDService<UserRequestDTO, UserResponseDTO
             throw new ResourceBadRequestException("E-mail e senha são obrigatórios!");
         }
     }
+
+    public UserResponseDTO login(UserRequestDTO dto) {
+        Optional<User> optionalUser = userRepository.findByEmail(dto.getEmail());
+
+        if (!optionalUser.isPresent()) {
+            throw new ResourceNotFoundException("Usuário não encontrado para o email: " + dto.getEmail());
+        }
+
+        User user = optionalUser.get();
+
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new ResourceBadRequestException("Credenciais inválidas");
+        }
+
+        return mapper.map(user, UserResponseDTO.class);
+    }
 }
