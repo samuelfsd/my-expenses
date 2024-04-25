@@ -65,6 +65,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = jwtUtil.createToken(auth);
 
         // don't use mapper in this package
+
         UserResponseDTO userResponse = new UserResponseDTO();
         userResponse.setId(user.getId());
         userResponse.setEmail(user.getEmail());
