@@ -1,7 +1,14 @@
 import { toast } from "@/components/ui/use-toast"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const errorHandler = (error: any) => {
+type Error = {
+  response: {
+    data: {
+      message: string;
+    }
+  };
+}
+
+export const errorHandler = (error: Error) => {
   if (error.response) {
       toast({
         variant: "destructive",
