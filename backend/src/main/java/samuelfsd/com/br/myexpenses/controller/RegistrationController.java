@@ -34,7 +34,7 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.getAll());
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<RegistrationResponseDTO> getById(@PathVariable Long id){
         return ResponseEntity.ok(registrationService.getById(id));
     }
