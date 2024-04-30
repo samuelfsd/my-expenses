@@ -1,42 +1,36 @@
+import { create} from 'zustand';
+import { setCookie, destroyCookie, parseCookies } from 'nookies';
 
-import { create } from 'zustand'
-
-import {setCookie, destroyCookie, parseCookies} from 'nookies'
-
-type AuthStore = {
+interface AuthState {
   token: string;
+  loggedIn: boolean;
 
-  setToken: (token: string ) => void;
-  clearToken: () => void;
   getToken: () => string;
+
+  signIn: (token: string) => void;
+  signOut: () => void;
 }
 
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   token: '',
+  loggedIn: false,
 
-  setToken: (token) => {
-    set({ token });
-    if (token) {
-      // Salva o token no cookie
-      setCookie(null, 'token', token, {
-        maxAge: 30 * 24 * 60 * 60, // 30 dias de duração do cookie
-        path: '/', // Caminho raiz para estar disponível em todo o site
-      });
-    } else {
-      // Remove o cookie se o token for vazio
-      destroyCookie(null, 'token', null);
-    }
+  getToken: () =>{
+    const cookies = parseCookies()
+    return cookies.token;
   },
 
-  clearToken: () => {
-    // Remove o cookie e reseta o estado para o token vazio
+  signIn: ( token ) => {
+    setCookie(null, 'token', token, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
+    set({ token: token, loggedIn: true });
+  },
+
+  signOut: () => {
     destroyCookie(null, 'token', null);
-    set({ token: '' });
-  },
-
-  getToken: () => {
-    // Retorna o token do cookie
-    const cookies = parseCookies();
-    return cookies.token || '';
+    set({ token: '', loggedIn: false});
   },
 }));
+
