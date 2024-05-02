@@ -1,15 +1,19 @@
+import { useEffect, useState } from "react"
 
-import { Link, redirect } from "react-router-dom"
+import { z } from 'zod'
+import { Link, useNavigate } from "react-router-dom"
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Spinner } from "@/components/ui/spinner"
 
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import loginUser from "@/services/loginUser"
+import { userLogin } from "@/services/userAuth"
+import { useAuthStore } from "@/stores/authStore"
+import { toast } from "@/components/ui/use-toast"
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -19,17 +23,30 @@ const LoginSchema = z.object({
 type LoginUserSchema = z.infer<typeof LoginSchema>
 
 export const Login = () => {
+  const [loading, setLoading] = useState<boolean>(false)
+  const loggedIn = useAuthStore((state) => state.loggedIn)
+  const navigate  = useNavigate()
+
   const { register, handleSubmit } = useForm<LoginUserSchema>({
     resolver: zodResolver(LoginSchema)
   })
 
-  const handleLoginAccount = async (data: LoginUserSchema)  => {
-    const loggedIn = await loginUser(data)
 
-    if (loggedIn){
-      return redirect("/dashboard")
+  const handleLoginAccount = async (data: LoginUserSchema)  => {
+    setLoading(true)
+    const success = await userLogin(data)
+    setLoading(false)
+
+    if (!success) {
+      toast({ variant: "destructive", title: "Erro", description: "Aconteceu algo inesperado..."})
     }
   }
+
+  useEffect(() => {
+    if(loggedIn) {
+      navigate("/")
+    }
+  }, [loggedIn, navigate])
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -63,14 +80,14 @@ export const Login = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" type="submit">
+           {loading ? <Spinner size="medium" >Carregando...</Spinner> :  <Button className="w-full" type="submit">
               Entrar
-            </Button>
+            </Button>}
           </CardFooter>
           </form>
         </Card>
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-          Não possuí uma conta?
+          Não possuí uma conta? {''}
           <Link
             className="font-medium text-gray-900 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
             to="/cadastrar"
