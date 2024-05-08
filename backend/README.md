@@ -32,14 +32,14 @@ Projeto para gerenciar minhas finaças!
 
 # futuras implementações
 
-- [ ] testes de unidade ? 
-- [ ] testes de integração ? 
-- [ ] testes end to end ? 
-- [ ] subir numa cloud ? 
+- [ ] testes de unidade ?
+- [ ] testes de integração ?
+- [ ] testes end to end ?
+- [ ] subir numa cloud ?
 - [ ] documentar (swagger)
 
 # infra
 - [x] docker
-- [ ] pipeline ? 
-- [ ] ci/cd ? 
+- [ ] pipeline ?
+- [ ] ci/cd ?
 - [ ] aws ?
