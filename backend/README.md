@@ -39,6 +39,7 @@ Projeto para gerenciar minhas finaças!
 - [ ] documentar (swagger)
 
 # infra
+- [x] docker
 - [ ] pipeline ? 
 - [ ] ci/cd ? 
 - [ ] aws ?
