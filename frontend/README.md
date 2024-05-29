@@ -1,5 +1,12 @@
-# React + TypeScript + Vite
+# My expenses front-end
 
+techs: 
+- typescript
+- react
+- vite
+- react router dom 
+- zod
+- react hook form
 ## Como rodar? 
 
 Primeiro, clone o projeto.
