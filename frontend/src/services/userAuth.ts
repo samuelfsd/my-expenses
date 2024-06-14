@@ -18,15 +18,14 @@ export const userRegister = async (credentials: Credentials): Promise<boolean> =
       title: "Erro",
       description: "Erro ao fazer cadastro"
     })
-    console.error('Erro ao fazer cadastro:', error);
+    console.error('Erro ao fazer cadastro:',);
     return false;
   }
 };
 
 export const userLogin = async (credentials: Credentials): Promise<boolean> => {
   try {
-    console.log('aqui', credentials)
-    const response = await axiosInstance.post('/auth', credentials);
+    const response = await axiosInstance.post('/auth/login', credentials);
     console.log('response', response)
     const { token } = response.data;
     useAuthStore.getState().signIn(token)

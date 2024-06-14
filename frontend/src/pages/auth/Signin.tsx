@@ -44,6 +44,7 @@ export const Signin = () => {
 
     if (!success) {
       toast({ variant: "destructive", title: "Erro", description: "Aconteceu algo inesperado..."})
+      return
     }
 
     toast({title: "Sucesso.", description: "Cadastro realizado com sucesso!"})

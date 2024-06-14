@@ -1,22 +1,22 @@
 # My expenses front-end
 
-techs: 
+techs:
 - typescript
 - react
 - vite
-- react router dom 
+- react router dom
 - zod
 - react hook form
-## Como rodar? 
+## Como rodar?
 
 Primeiro, clone o projeto.
 
-Posteriormente instale as dependências: 
+Posteriormente instale as dependências:
 ```js
   npm i
 ```
 
-Logo após rode o comando para subir localmente a dev: 
+Logo após rode o comando para subir localmente a dev:
 
 ```js
   npm run dev
