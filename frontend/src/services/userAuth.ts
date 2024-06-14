@@ -9,7 +9,7 @@ interface Credentials {
 
 export const userRegister = async (credentials: Credentials): Promise<boolean> => {
   try {
-    await axiosInstance.post('/users', credentials);
+    await axiosInstance.post('/auth/register', credentials);
     toast({title: "Sucesso", description: "Sucesso ao cadastrar um usuário!"})
     return true;
   } catch (error) {
@@ -25,7 +25,9 @@ export const userRegister = async (credentials: Credentials): Promise<boolean> =
 
 export const userLogin = async (credentials: Credentials): Promise<boolean> => {
   try {
+    console.log('aqui', credentials)
     const response = await axiosInstance.post('/auth', credentials);
+    console.log('response', response)
     const { token } = response.data;
     useAuthStore.getState().signIn(token)
     toast({ title: "Sucesso", description: "Login bem-sucedido!" });
