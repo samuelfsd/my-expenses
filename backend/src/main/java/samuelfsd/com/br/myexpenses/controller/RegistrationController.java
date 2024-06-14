@@ -4,7 +4,6 @@ package samuelfsd.com.br.myexpenses.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import samuelfsd.com.br.myexpenses.dto.Registration.RegistrationResponseDTO;
 
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping(ApiPrefix.API_V1_PREFIX + "/registrations")
 public class RegistrationController {

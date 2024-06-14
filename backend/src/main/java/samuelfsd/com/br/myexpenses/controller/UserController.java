@@ -3,7 +3,6 @@ package samuelfsd.com.br.myexpenses.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import samuelfsd.com.br.myexpenses.dto.User.UserResponseDTO;
 
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping(ApiPrefix.API_V1_PREFIX + "/users")
 public class UserController {
@@ -39,6 +37,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> create(@RequestBody UserRequestDTO dto) {
+        System.out.println("chegou aqui");
         UserResponseDTO user = userService.create(dto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }

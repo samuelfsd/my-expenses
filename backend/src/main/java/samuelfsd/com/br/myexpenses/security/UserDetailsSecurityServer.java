@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import samuelfsd.com.br.myexpenses.domain.model.User;
 import samuelfsd.com.br.myexpenses.domain.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -25,6 +26,6 @@ public class UserDetailsSecurityServer implements UserDetailsService {
             throw new UsernameNotFoundException("Usuário ou senha inválidos");
         }
 
-        return userOpt.get();
+        return new org.springframework.security.core.userdetails.User(userOpt.get().getEmail(), userOpt.get().getPassword(), new ArrayList<>());
     }
 }
