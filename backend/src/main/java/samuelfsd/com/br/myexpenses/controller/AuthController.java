@@ -39,7 +39,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
-        System.out.println("chegou login");
         User user = this.repository.findByEmail(dto.getEmail()).orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado um usuário com este email"));
         if(passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             String token = this.jwtService.generateToken(user);
@@ -53,7 +52,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<LoginResponseDTO> register(@RequestBody LoginRequestDTO dto) {
-        System.out.println("chegou register");
         Optional<User> user = this.repository.findByEmail(dto.getEmail());
 
         if (user.isEmpty()) {
