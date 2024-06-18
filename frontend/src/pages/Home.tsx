@@ -1,7 +1,13 @@
 export const Home = () => {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <h1>Home page</h1>
+    <div className="grid grid-cols-[16rem_1fr] gap-4">
+      <aside className="border-r border-border">
+        sidebar
+      </aside>
+
+      <main>
+        content
+      </main>
     </div>
   )
 }

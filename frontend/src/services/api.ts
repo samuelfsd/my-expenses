@@ -3,6 +3,9 @@ import { parseCookies } from 'nookies';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:8080/api/v1',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -11,7 +14,7 @@ axiosInstance.interceptors.request.use((config) => {
 
   if (token) {
     console.log('token', token)
-    config.headers['Authorization'] = 'Bearer ' + token;
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
   return config;
