@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
-export const NotFound = () =>  {
+export const NotFound = () => {
   return (
     <div className="flex h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 dark:bg-gray-950">
       <div className="space-y-4 text-center">
-        <h1 className="text-9xl font-bold tracking-tighter text-gray-900 dark:text-gray-50">404</h1>
+        <h1 className="text-9xl font-bold tracking-tighter text-gray-900 dark:text-gray-50">
+          404
+        </h1>
         <p className="text-xl font-medium text-gray-500 dark:text-gray-400">
           Oops, a página que você estava procurando não existe.
         </p>
