@@ -72,7 +72,7 @@ export const Login = () => {
         <Card>
           <form onSubmit={handleSubmit(handleLoginAccount)}>
             <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
+              <CardTitle className="text-2xl">Entrar</CardTitle>
               <CardDescription>
                 Informe seu email e senha para entrar.
               </CardDescription>
